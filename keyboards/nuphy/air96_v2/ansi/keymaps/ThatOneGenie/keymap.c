@@ -17,9 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 
-enum custom_keycodes {
+enum my_keycodes {
     RGB1 = SAFE_RANGE,
-    RGB2
+    RGB2,
+    RGB3
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -27,9 +28,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case RGB1:
         if (record->event.pressed) {
             // Loop 15 times when keycode is pressed
-            for (int i=0; i < 15; ++i){
-                tap_code(RGB_MOD);
-            }
+            //for (int i=0; i < 15; ++i){
+            rgblight_mode(RGB_MATRIX_TYPING_HEATMAP);
+            //}
         } else {
             // When keycode is released
         }
@@ -38,9 +39,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case RGB2:
         if (record->event.pressed) {
             // Loop 15 times when keycode is pressed
-            for (int i=0; i < 15; ++i){
-                tap_code(RGB_RMOD);
-            }
+            //for (int i=0; i < 15; ++i){
+            rgblight_mode(RGB_MATRIX_CYCLE_LEFT_RIGHT);
+           // }
+        } else {
+            // When keycode is released
+        }
+        break;
+        
+        case RGB3:
+        if (record->event.pressed) {
+            // Loop 15 times when keycode is pressed
+            //for (int i=0; i < 15; ++i){
+            rgblight_mode(RGB_MATRIX_GRADIENT_UP_DOWN);
+           // }
         } else {
             // When keycode is released
         }
@@ -81,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	_______, 	LNK_BLE1,  	LNK_BLE2,  	LNK_BLE3,  	LNK_RF,   	_______,   	_______,   	_______,   	_______,   	_______,  	_______,   	_______,	_______, 	_______,				_______,	_______,	_______,	_______,
 	_______, 	_______,   	_______,   	_______,  	_______,   	_______,   	_______,   	_______,   	_______,   	_______,  	_______,   	DEV_RESET,	SLEEP_MODE, BAT_SHOW,				RGB_SAD,	RGB_SAI,	_______,	_______,
 	_______,	_______,   	_______,   	_______,  	_______,   	_______,   	_______,	_______,   	_______,   	_______,  	_______,	_______,  	_______,							RGB_HUD,	RGB_HUI,	_______,
-	MO(4),				    _______,   	_______,   	_______,  	_______,   	_______,   	_______,	MO(4), 		RGB_SPD,	RGB_SPI,	_______, 	MO(4),				    RGB_VAI,	RGB1,	RGB2,	_______,	_______,
+	MO(4),				    _______,   	_______,   	_______,  	_______,   	_______,   	_______,	MO(4), 		RGB_SPD,	RGB_SPI,	_______, 	MO(4),				    RGB_VAI,	RGB1,	RGB2,	RGB3,	_______,
 	_______,	_______,	_______,										_______, 							_______,	_______, 	_______,							RGB_RMOD,	RGB_VAD,    RGB_MOD,	RGB_TOG,	_______),
 // layer 4 function
 [4] = LAYOUT(
