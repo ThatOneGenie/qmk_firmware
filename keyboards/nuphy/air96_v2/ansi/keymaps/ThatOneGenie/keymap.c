@@ -83,7 +83,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         case WINTERM:
             if (record->event.pressed) {
-                SEND_STRING(SS_LGUI("r") "cmd" SS_DELAY(500) SS_TAP(X_ENT));
+                SEND_STRING(SS_LGUI("r") SS_DELAY(500) "cmd" SS_DELAY(500) SS_TAP(X_ENT));
             } else {
 
             }
